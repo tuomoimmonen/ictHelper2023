@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 28aa8dcc6c760824bb55536843a44320
+guid: ef98150994401f745aae6d219c27872d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -149,379 +149,274 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ictGame2023Assets_0
+      name: ictGame2023NumberAssets_0
       rect:
         serializedVersion: 2
-        x: 80
-        y: 520
-        width: 100
-        height: 110
+        x: 121
+        y: 181
+        width: 16
+        height: 28
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2bd0557377c7e9e45b71ba20afa3889b
-      internalID: -1656498554
+      spriteID: 606c4378e7ead954bad29da3cbe4ed63
+      internalID: -1778244829
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ictGame2023Assets_1
+      name: ictGame2023NumberAssets_1
       rect:
         serializedVersion: 2
-        x: 222
-        y: 584
-        width: 85
-        height: 74
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 302ff2168d9e3e14aa73fafecbef188e
-      internalID: -797995847
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ictGame2023Assets_2
-      rect:
-        serializedVersion: 2
-        x: 361
-        y: 588
-        width: 60
-        height: 71
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 98ccc6914f7b37546b45903a0ea9cc05
-      internalID: 1249785375
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ictGame2023Assets_3
-      rect:
-        serializedVersion: 2
-        x: 684
-        y: 517
-        width: 98
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 782f506c2e5bca34fbab90c0c1ae7566
-      internalID: -1530893426
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ictGame2023Assets_4
-      rect:
-        serializedVersion: 2
-        x: 832
-        y: 519
-        width: 97
-        height: 100
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ad6a8429056b69649a6b0694d94d1af3
-      internalID: -1045432758
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ictGame2023Assets_5
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 459
-        width: 54
-        height: 37
-      alignment: 9
-      pivot: {x: 0.92562205, y: 0.46272898}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: eea51ddf81381b8449de394b99938a1f
-      internalID: -1496287965
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ictGame2023Assets_6
-      rect:
-        serializedVersion: 2
-        x: 171
-        y: 459
-        width: 55
-        height: 37
-      alignment: 9
-      pivot: {x: 0.09047408, y: 0.4751521}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d8bb9880c374b6c46bbe70c2d02ea5a2
-      internalID: -784157962
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: ictGame2023Assets_7
-      rect:
-        serializedVersion: 2
-        x: 322
+        x: 141
         y: 182
-        width: 337
-        height: 331
+        width: 12
+        height: 27
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c9267e53d8166c64596af156117f4358
-      internalID: 1548571017
+      spriteID: 0018d74e82db0cc40aaf17bbf4c84297
+      internalID: 1000883399
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ictGame2023Assets_8
+      name: ictGame2023NumberAssets_2
       rect:
         serializedVersion: 2
-        x: 684
-        y: 389
-        width: 97
-        height: 98
+        x: 212
+        y: 169
+        width: 12
+        height: 27
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e7011c3a53691ff4faa38ef7ee9d1eb9
-      internalID: 1002192342
+      spriteID: c2b6742a6628a7347bb164217e9103ca
+      internalID: -1370379898
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ictGame2023Assets_9
+      name: ictGame2023NumberAssets_3
       rect:
         serializedVersion: 2
-        x: 830
-        y: 389
-        width: 95
-        height: 97
+        x: 230
+        y: 168
+        width: 16
+        height: 29
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c7459f04c93b7c41bbea84fe97d334e
-      internalID: -228547105
+      spriteID: edeef2c0daafabc4da207d43095feefa
+      internalID: 1875936074
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ictGame2023Assets_10
+      name: ictGame2023NumberAssets_4
       rect:
         serializedVersion: 2
-        x: 982
-        y: 402
-        width: 18
-        height: 70
+        x: 250
+        y: 169
+        width: 12
+        height: 27
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5b0beb5eefca5943bc7fb8f3d01cce9
-      internalID: -1681259360
+      spriteID: ef1767e0609757646ad88bfe4d52d4b6
+      internalID: -1023868966
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ictGame2023Assets_11
+      name: ictGame2023NumberAssets_5
       rect:
         serializedVersion: 2
-        x: 269
-        y: 446
-        width: 30
-        height: 9
+        x: 85
+        y: 110
+        width: 12
+        height: 27
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ae6e8a5131c43d044b2177b7acf1d424
-      internalID: 1991582527
+      spriteID: a9e2c6eeac25a6b4491e275145fa2a5a
+      internalID: 2036132840
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ictGame2023Assets_12
+      name: ictGame2023NumberAssets_6
       rect:
         serializedVersion: 2
-        x: 685
-        y: 272
-        width: 96
-        height: 96
+        x: 168
+        y: 108
+        width: 16
+        height: 29
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b99867ffd5daa5e4b9a3563c425cdd0e
-      internalID: -2125668311
+      spriteID: 8e5e473e430ef694db3dd8175b10c108
+      internalID: -1302222456
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ictGame2023Assets_13
+      name: ictGame2023NumberAssets_7
       rect:
         serializedVersion: 2
-        x: 829
-        y: 272
-        width: 97
-        height: 95
+        x: 119
+        y: 47
+        width: 16
+        height: 28
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: cd59dd23678747b42a822d13ce2a554c
-      internalID: -53015140
+      spriteID: af92d446acb74254f89626b7cc39238e
+      internalID: 1098539495
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ictGame2023Assets_14
+      name: ictGame2023NumberAssets_8
       rect:
         serializedVersion: 2
-        x: 684
-        y: 150
-        width: 99
-        height: 96
+        x: 140
+        y: 47
+        width: 16
+        height: 28
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 10c977bdee36d804985f5d60461e6727
-      internalID: -1941903662
+      spriteID: 7a588e3081239ae4c9b00604c676460a
+      internalID: -2075924173
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ictGame2023Assets_15
+      name: ictGame2023NumberAssets_9
       rect:
         serializedVersion: 2
-        x: 832
-        y: 151
-        width: 96
-        height: 97
+        x: 160
+        y: 48
+        width: 12
+        height: 27
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 72be6c35ad8258c41bd2d0e1c0dc28ff
-      internalID: 1830590816
+      spriteID: a8a622121d6b19a4792f4bb3cc848eda
+      internalID: 334623724
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ictGame2023Assets_16
+      name: ictGame2023NumberAssets_10
       rect:
         serializedVersion: 2
-        x: 692
-        y: 35
-        width: 82
-        height: 81
+        x: 208
+        y: 163
+        width: 58
+        height: 38
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 89fe34bd09abf144083bd5f7a49f515e
-      internalID: 235902626
+      spriteID: 2e14709eff663bd419ca5e1e0bfdc498
+      internalID: 1663073824
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ictGame2023Assets_17
+      name: ictGame2023NumberAssets_11
       rect:
         serializedVersion: 2
-        x: 829
-        y: 37
-        width: 100
-        height: 99
+        x: 114
+        y: 42
+        width: 62
+        height: 38
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 98a9116bfa76f4f4eb910c70e02899a6
-      internalID: -1730258254
+      spriteID: 0fe53d7babf7d1046a37d5ce80769363
+      internalID: 28783964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ictGame2023NumberAssets_12
+      rect:
+        serializedVersion: 2
+        x: 115
+        y: 175
+        width: 43
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b6d2bfb4f514d64680caedf865b8645
+      internalID: -429847398
       vertices: []
       indices: 
       edges: []
@@ -537,24 +432,19 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ictGame2023Assets_0: -1656498554
-      ictGame2023Assets_1: -797995847
-      ictGame2023Assets_10: -1681259360
-      ictGame2023Assets_11: 1991582527
-      ictGame2023Assets_12: -2125668311
-      ictGame2023Assets_13: -53015140
-      ictGame2023Assets_14: -1941903662
-      ictGame2023Assets_15: 1830590816
-      ictGame2023Assets_16: 235902626
-      ictGame2023Assets_17: -1730258254
-      ictGame2023Assets_2: 1249785375
-      ictGame2023Assets_3: -1530893426
-      ictGame2023Assets_4: -1045432758
-      ictGame2023Assets_5: -1496287965
-      ictGame2023Assets_6: -784157962
-      ictGame2023Assets_7: 1548571017
-      ictGame2023Assets_8: 1002192342
-      ictGame2023Assets_9: -228547105
+      ictGame2023NumberAssets_0: -1778244829
+      ictGame2023NumberAssets_1: 1000883399
+      ictGame2023NumberAssets_10: 1663073824
+      ictGame2023NumberAssets_11: 28783964
+      ictGame2023NumberAssets_12: -429847398
+      ictGame2023NumberAssets_2: -1370379898
+      ictGame2023NumberAssets_3: 1875936074
+      ictGame2023NumberAssets_4: -1023868966
+      ictGame2023NumberAssets_5: 2036132840
+      ictGame2023NumberAssets_6: -1302222456
+      ictGame2023NumberAssets_7: 1098539495
+      ictGame2023NumberAssets_8: -2075924173
+      ictGame2023NumberAssets_9: 334623724
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

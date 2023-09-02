@@ -14,10 +14,16 @@ public class Hazard : MonoBehaviour
     private AudioSource motorSound;
 
     GameManager manager; //reference to gamemanager
+    BackgroundController backgroundController;
 
+    public bool firstTimeHit = true;
+
+    WaveSpawner waveSpawner;
 
     void Start()
     {
+        waveSpawner = FindObjectOfType<WaveSpawner>();
+        backgroundController = FindObjectOfType<BackgroundController>();
         motorSound = GetComponent<AudioSource>();
         manager = FindObjectOfType<GameManager>(); //manager handles buffs and points
         speed = Random.Range(minMovementSpeed, maxMovementSpeed); //random speed hazard
@@ -37,23 +43,38 @@ public class Hazard : MonoBehaviour
         if(collision.tag == "Planet") //if collision object is "Planet" tag
         {
             //manager.planetLife -= 1;
+            waveSpawner.enemiesAlive--;
             SFXManager.instance.PlaySfxPitched(2);
             manager.StartCoroutine("PlanetHit");
             manager.UpdateHeartUi();
             Instantiate(planetHitParticles, transform.position, Quaternion.identity); //hit particles here
             Destroy(gameObject); //destroy this gameobject
         }
-
+        
         if(collision.tag == "Player")
         {
+            if (firstTimeHit)
+            {
+                waveSpawner.enemiesAlive--;
+                backgroundController.AnimateBackground();
+                SFXManager.instance.PlaySfxPitched(0);
+                ScoreNumberController.instance.SpawnScore(1, transform.position);
+                manager.superMeter += 1;
+                Score.Instance.AddScore(1);
+                firstTimeHit = false;
+            }
+            /*
+            backgroundController.AnimateBackground();
             SFXManager.instance.PlaySfxPitched(0);
             ScoreNumberController.instance.SpawnScore(1, transform.position);
             manager.superMeter += 1;
             Score.Instance.AddScore(1);
-            Instantiate(destroyParticles, transform.position, Quaternion.identity); //player hit particles here
+            //Instantiate(destroyParticles, transform.position, Quaternion.identity); //player hit particles here
             //manager.Score(1);
-            Destroy(gameObject);
+            */
+            Destroy(gameObject, 2f);
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        
     }
 }

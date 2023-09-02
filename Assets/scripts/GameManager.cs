@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     private float playerSpeedBuff = -300f; //players buff speed
     private bool buffAvailable = true; //bool for limiting one buff at a time
     [SerializeField] GameObject[] multiplePlayers;
-    [SerializeField] Transform spritesScale; //for buff sprite scale
+    [SerializeField] Transform[] spritesScale; //for buff sprite scale
     [SerializeField] TMP_Text superDurationTimerText;
     [SerializeField] Vector3 buffSize = new Vector3(2,2,2);
     [SerializeField] Vector3 buffLocation = new Vector3(0, 1, 0);
@@ -82,7 +82,7 @@ public class GameManager : MonoBehaviour
         planeLifeText.text = "PLANET LIFE: " + planetLife.ToString(); //start life
         timerText.text = surviveTimer.ToString("F0"); //survive timer rolling F0 zero decimal
         superSlider.value = superMeter;
-        scoreText.text = "SCORE: " + Score.Instance.scorePoints.ToString();
+        scoreText.text = "PISTEET: " + Score.Instance.scorePoints.ToString();
 
         //next level system
         if (surviveTimer <= 0)
@@ -93,7 +93,7 @@ public class GameManager : MonoBehaviour
         }
 
         //super system
-        if (superMeter == 5 && buffAvailable == true) //when full and buff is ready
+        if (superMeter == 1 && buffAvailable == true) //when full and buff is ready
         {
             SFXManager.instance.PlaySfx(4);
             superTimer = 5f;
@@ -105,8 +105,13 @@ public class GameManager : MonoBehaviour
                 //size buff TODO GET NUMBERS TO VARIABLES
                 //spritesScale.localScale = new Vector3(4, 4, 4);
                 //spritesScale.localScale *= 2f;
-                spritesScale.localPosition += buffLocation;
-                spritesScale.localScale += buffSize;
+                //spritesScale[0].localPosition += buffLocation;
+                //spritesScale[0].localScale += buffSize;
+                for (int i = 0; i < 3; i++)
+                {
+                    spritesScale[i].localPosition += buffLocation;
+                    spritesScale[i].localScale += buffSize;
+                }
                 superSizeEffect.enableEmission = true;
                 StartCoroutine(RevertSizeBuff()); //buff off
             }
@@ -188,8 +193,13 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(superDuration);
         superSizeEffect.enableEmission = false;
-        spritesScale.localScale -= buffSize;
-        spritesScale.localPosition -= buffLocation;
+        //spritesScale[0].localScale -= buffSize;
+        //spritesScale[0].localPosition -= buffLocation;
+        for (int i = 0; i < 3; i++)
+        {
+            spritesScale[i].localPosition -= buffLocation;
+            spritesScale[i].localScale -= buffSize;
+        }
         superMeter = 0; //reset supermeter
         buffAvailable = true; //buff available
         SFXManager.instance.StopSfx();

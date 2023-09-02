@@ -6,6 +6,8 @@ public class PlanetController : MonoBehaviour
 {
     public Animator planetAnimator;
     GameManager gameManager;
+
+    public bool isAlive = true;
     void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -21,6 +23,7 @@ public class PlanetController : MonoBehaviour
 
         if(gameManager.planetLife == 0)
         {
+            isAlive = false;
             planetAnimator.SetTrigger("death");
         }
         

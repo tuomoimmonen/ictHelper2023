@@ -34,11 +34,7 @@ public class Score : MonoBehaviour
     }
     void Start()
     {
-        
-        //scorePointsText = GameObject.FindGameObjectWithTag("Score").GetComponent<TMP_Text>();
-        //scorePointsText.text = "Score: " + scorePoints.ToString();
-        //Debug.Log(scorePointsText.gameObject);
-        
+
     }
     void Update()
     {
