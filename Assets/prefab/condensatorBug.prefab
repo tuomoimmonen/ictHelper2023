@@ -287,8 +287,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 1
-      minScalar: 0.7
+      scalar: 0.7
+      minScalar: 0.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -870,7 +870,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 30
+      scalar: 15
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4991,6 +4991,7 @@ MonoBehaviour:
   maxMovementSpeed: 1.5
   destroyParticles: {fileID: 7257770090039802072, guid: d1d6cb6c43bc6d343a8bafff17de3c7d, type: 3}
   planetHitParticles: {fileID: 7257770090039802072, guid: 0ba5f4a016cdcc54e8471ebd829574b5, type: 3}
+  firstTimeHit: 1
 --- !u!58 &2797359234850462602
 CircleCollider2D:
   m_ObjectHideFlags: 0

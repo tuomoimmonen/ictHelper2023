@@ -29,7 +29,15 @@ public class WaveSpawner : MonoBehaviour
     private void Start()
     {
         planet = FindObjectOfType<PlanetController>();
-        StartCoroutine(SpawnWaves());
+        //StartCoroutine(SpawnWaves());
+    }
+
+    private void Update()
+    {
+        if(GameManager.instance.leftKeyPressed && GameManager.instance.rightKeyPressed)
+        {
+            StartCoroutine(SpawnWaves());
+        }
     }
 
     private IEnumerator SpawnWaves()

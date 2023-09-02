@@ -53,14 +53,30 @@ public class GameManager : MonoBehaviour
 
     [Header("Level transitioning")]
     [SerializeField] TMP_Text transitioningText;
+    [SerializeField] Animator textAnimator;
 
     PlanetController planetController;
+
+    public static GameManager instance;
+    public bool gameStarted = false;
+    [SerializeField] TMP_Text oikealleText;
+    [SerializeField] TMP_Text vasemmalleText;
+    public bool rightKeyPressed = false;
+    public bool leftKeyPressed = false;
+
     private void Awake()
     {
         Time.timeScale = 1.0f;
-        //DontDestroyOnLoad(this);
-    }
 
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         planetController = FindObjectOfType<PlanetController>();
@@ -77,8 +93,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        GameTutorial();
         //UpdateHeartUi();
-        surviveTimer -= Time.deltaTime;
+        if (gameStarted)
+        {
+            surviveTimer -= Time.deltaTime;
+        }
         planeLifeText.text = "PLANET LIFE: " + planetLife.ToString(); //start life
         timerText.text = surviveTimer.ToString("F0"); //survive timer rolling F0 zero decimal
         superSlider.value = superMeter;
@@ -158,6 +178,43 @@ public class GameManager : MonoBehaviour
             player.playerIsAllowedMove = false; //players movement restriction
             planetIsAlive = false; //no doubles
             StartCoroutine(GameOver());
+        }
+    }
+
+    private void GameTutorial()
+    {
+        if(gameStarted == false)
+        {
+            if (!GameManager.instance.rightKeyPressed && Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                GameManager.instance.rightKeyPressed = true;
+            }
+            else if (GameManager.instance.rightKeyPressed && !GameManager.instance.leftKeyPressed && Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+                GameManager.instance.leftKeyPressed = true;
+                gameStarted = true;
+            }
+        }
+
+        if (!GameManager.instance.rightKeyPressed)
+        {
+
+            oikealleText.gameObject.SetActive(true);
+            textAnimator.SetTrigger("oikealle");
+        }
+        else
+        {
+            oikealleText.gameObject.SetActive(false);
+
+            if (!GameManager.instance.leftKeyPressed)
+            {
+                vasemmalleText.gameObject.SetActive(true);
+                textAnimator.SetTrigger("vasemmalle");
+            }
+            else
+            {
+                vasemmalleText.gameObject.SetActive(false);
+            }
         }
     }
 
