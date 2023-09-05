@@ -34,7 +34,7 @@ public class WaveSpawner : MonoBehaviour
 
     private void Update()
     {
-        if(GameManager.instance.leftKeyPressed && GameManager.instance.rightKeyPressed)
+        if(GameManager.instance.gameStarted)
         {
             StartCoroutine(SpawnWaves());
         }

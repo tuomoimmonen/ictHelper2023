@@ -31,6 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Vector3 buffLocation = new Vector3(0, 1, 0);
     [SerializeField] ParticleSystem speedEffect;
     [SerializeField] ParticleSystem superSizeEffect;
+    [SerializeField] GameObject firewallBuff;
 
     [Header("Getting hit")]
     [SerializeField] GameObject hurtPanel; //visual clue for planet hit
@@ -63,19 +64,28 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text vasemmalleText;
     public bool rightKeyPressed = false;
     public bool leftKeyPressed = false;
+    public bool rightMouseClicked = false;
+    public bool leftMouseClicked = false;   
+
+    [SerializeField] TMP_Text gameOverScoreBoardText;
+    [SerializeField] TMP_Text gameWinScoreBoardText;
 
     private void Awake()
     {
         Time.timeScale = 1.0f;
-
+        
         if (instance == null)
         {
             instance = this;
         }
+        /*
         else
         {
             Destroy(gameObject);
         }
+
+        DontDestroyOnLoad(this);
+        */
     }
     void Start()
     {
@@ -89,19 +99,28 @@ public class GameManager : MonoBehaviour
         superDurationTimerText.enabled = true;
         speedEffect.enableEmission = false;
         superSizeEffect.enableEmission = false;
+        UpdateHeartUi();
     }
 
     void Update()
     {
-        GameTutorial();
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            GameTutorial();
+        }
+        else { gameStarted = true; }
+
         //UpdateHeartUi();
         if (gameStarted)
         {
             surviveTimer -= Time.deltaTime;
         }
-        planeLifeText.text = "PLANET LIFE: " + planetLife.ToString(); //start life
+        planeLifeText.text = "PLANET LIFE: " + PlanetLifeController.instance.playerLife.ToString(); //start life
         timerText.text = surviveTimer.ToString("F0"); //survive timer rolling F0 zero decimal
-        superSlider.value = superMeter;
+        if(buffAvailable)
+        {
+            superSlider.value = superMeter;
+        }
         scoreText.text = "PISTEET: " + Score.Instance.scorePoints.ToString();
 
         //next level system
@@ -113,13 +132,88 @@ public class GameManager : MonoBehaviour
         }
 
         //super system
-        if (superMeter == 1 && buffAvailable == true) //when full and buff is ready
+        if (superMeter == 2 && buffAvailable == true) //when full and buff is ready
         {
             SFXManager.instance.PlaySfx(4);
             superTimer = 5f;
             int randomBuff = Random.Range(0, 101); //random number for random buff
             buffAvailable = false; //buff off, 1 buff at a time
 
+            //level based buff
+            if(SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                //player speed buff
+                player.playerSpeed = playerSpeedBuff; //speed buff
+                speedEffect.enableEmission = true;
+                StartCoroutine(RevertSpeedBuff()); //buff off
+            }
+            else if (SceneManager.GetActiveScene().buildIndex == 2)
+            {
+                //size buff
+                for (int i = 0; i < 3; i++)
+                {
+                    spritesScale[i].localPosition += buffLocation;
+                    spritesScale[i].localScale += buffSize;
+                }
+                superSizeEffect.enableEmission = true;
+                StartCoroutine(RevertSizeBuff()); //buff off
+            }
+            else if (SceneManager.GetActiveScene().buildIndex == 3)
+            {
+                //multiple copies buff
+                for (int i = 0; i < multiplePlayers.Length; i++) //make the copies active
+                {
+                    multiplePlayers[i].SetActive(true);
+                }
+                StartCoroutine(RevertCopyBuff()); //buff off
+            }
+            else if (SceneManager.GetActiveScene().buildIndex == 4)
+            {
+                //firewall buff
+                firewallBuff.SetActive(true);
+                StartCoroutine(RevertFirewallBuff());
+            }
+            else if (SceneManager.GetActiveScene().buildIndex == 5)
+            {
+                if (randomBuff < 25)
+                {
+                    //size buff TODO GET NUMBERS TO VARIABLES
+                    //spritesScale.localScale = new Vector3(4, 4, 4);
+                    //spritesScale.localScale *= 2f;
+                    //spritesScale[0].localPosition += buffLocation;
+                    //spritesScale[0].localScale += buffSize;
+                    for (int i = 0; i < 3; i++)
+                    {
+                        spritesScale[i].localPosition += buffLocation;
+                        spritesScale[i].localScale += buffSize;
+                    }
+                    superSizeEffect.enableEmission = true;
+                    StartCoroutine(RevertSizeBuff()); //buff off
+                }
+                else if (randomBuff >= 25 && randomBuff <= 50)
+                {
+                    //multiple copies buff
+                    for (int i = 0; i < multiplePlayers.Length; i++) //make the copies active
+                    {
+                        multiplePlayers[i].SetActive(true);
+                    }
+                    StartCoroutine(RevertCopyBuff()); //buff off
+                }
+                else if(randomBuff > 50 && randomBuff <= 75)
+                {
+                    //firewall buff
+                    firewallBuff.SetActive(true);
+                    StartCoroutine(RevertFirewallBuff());
+                }
+                else
+                {
+                    //player speed buff
+                    player.playerSpeed = playerSpeedBuff; //speed buff
+                    speedEffect.enableEmission = true;
+                    StartCoroutine(RevertSpeedBuff()); //buff off
+                }
+            }
+            /*
             if (randomBuff < 33)
             {
                 //size buff TODO GET NUMBERS TO VARIABLES
@@ -151,6 +245,7 @@ public class GameManager : MonoBehaviour
                 speedEffect.enableEmission = true;
                 StartCoroutine(RevertSpeedBuff()); //buff off
             }
+            */
 
 
             //StartCoroutine(RevertSpeedBuff()); //revert buffs
@@ -168,7 +263,7 @@ public class GameManager : MonoBehaviour
         }
 
 
-        if (planetLife == 0 && planetIsAlive == true) //game over sequence player not moving
+        if (PlanetLifeController.instance.playerLife == 0 && planetIsAlive == true) //game over sequence player not moving
         {
             player.playerAnim.SetTrigger("death");
             Instantiate(playerDeathParticles, player.spriteTransform.position, player.spriteTransform.rotation);
@@ -185,18 +280,20 @@ public class GameManager : MonoBehaviour
     {
         if(gameStarted == false)
         {
-            if (!GameManager.instance.rightKeyPressed && Input.GetKeyDown(KeyCode.RightArrow))
+            if (!rightKeyPressed && Input.GetKeyDown(KeyCode.RightArrow) || !rightMouseClicked && Input.GetMouseButton(1))
             {
-                GameManager.instance.rightKeyPressed = true;
+                rightKeyPressed = true;
+                rightMouseClicked = true;
             }
-            else if (GameManager.instance.rightKeyPressed && !GameManager.instance.leftKeyPressed && Input.GetKeyDown(KeyCode.LeftArrow))
+            else if (rightKeyPressed && !leftKeyPressed && Input.GetKeyDown(KeyCode.LeftArrow) || rightMouseClicked && !leftMouseClicked && Input.GetMouseButton(0))
             {
-                GameManager.instance.leftKeyPressed = true;
+                leftKeyPressed = true;
+                leftMouseClicked = true;
                 gameStarted = true;
             }
         }
 
-        if (!GameManager.instance.rightKeyPressed)
+        if (!rightKeyPressed || !rightMouseClicked)
         {
 
             oikealleText.gameObject.SetActive(true);
@@ -206,7 +303,7 @@ public class GameManager : MonoBehaviour
         {
             oikealleText.gameObject.SetActive(false);
 
-            if (!GameManager.instance.leftKeyPressed)
+            if (!leftKeyPressed || !leftMouseClicked)
             {
                 vasemmalleText.gameObject.SetActive(true);
                 textAnimator.SetTrigger("vasemmalle");
@@ -218,6 +315,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private IEnumerator RevertFirewallBuff()
+    {
+        yield return new WaitForSeconds(superDuration); //superbar duration here
+        firewallBuff.SetActive(false); //buff pois päältä
+        superMeter = 0; //superi nollattu
+        buffAvailable = true; //new buff available
+        SFXManager.instance.StopSfx(); //äänet pois
+    }
     private IEnumerator RevertSpeedBuff()
     {
         yield return new WaitForSeconds(superDuration); //superbar duration here
@@ -276,33 +381,92 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator GameOver()
     {
+        //SimpleScoreBoard.instance.AddScore(Score.Instance.scorePoints);
+        if(buffAvailable)
+        {
+            for (int i = 0; i < multiplePlayers.Length; i++)
+            {
+                multiplePlayers[i].SetActive(false);
+            }
+
+            player.playerSpeed = playerOriginalSpeed;
+            speedEffect.gameObject.SetActive(false);
+
+            firewallBuff.SetActive(false); //buff pois päältä
+        }
+        UpdateLoseScoreBoardText();
         superSlider.gameObject.SetActive(false); //UI CLEAN when transitioning
         timerText.enabled = false;
         Instantiate(planetDeathParticles, transform.position, Quaternion.identity);
         yield return new WaitForSeconds(3);
-        gameOverHighScoreText.text = "HIGHSCORE: " + PlayerPrefs.GetInt("Highscore").ToString();
-        gameOverScoreText.text = "YOUR SCORE: " + Score.Instance.scorePoints.ToString();
+        SFXManager.instance.StopSfx();
+        gameOverHighScoreText.text = "ENNÄTYSPISTEET: " + PlayerPrefs.GetInt("Highscore").ToString();
+        gameOverScoreText.text = "PISTEESI: " + Score.Instance.scorePoints.ToString();
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
         //SceneManager.LoadScene("GameOver"); //reload gameover scene
     }
 
+    private void UpdateLoseScoreBoardText()
+    {
+        SimpleScoreBoard.instance.AddScore(Score.Instance.scorePoints);
+        gameOverScoreBoardText.text = "";
+        for (int i = 0; i < SimpleScoreBoard.instance.topScores.Length; i++)
+        {
+            gameOverScoreBoardText.text += (i + 1) + ". " + SimpleScoreBoard.instance.topScores[i] + "\n";
+        }
+    }
+
+    private void UpdateWinScoreBoardText()
+    {
+        SimpleScoreBoard.instance.AddScore(Score.Instance.scorePoints);
+        gameWinScoreBoardText.text = "";
+        for (int i = 0; i < SimpleScoreBoard.instance.topScores.Length; i++)
+        {
+            gameWinScoreBoardText.text += (i + 1) + ". " + SimpleScoreBoard.instance.topScores[i] + "\n";
+        }
+    }
+
+    public void WinBackToMainMenu()
+    {
+        Time.timeScale = 1;
+        PlanetLifeController.instance.playerLife = 3;
+        Score.Instance.scorePoints = 0;
+        gameWinPanel.SetActive(false);
+        SceneManager.LoadScene("MainMenu");
+    }
     public void RestartGame()
     {
         Time.timeScale = 1;
+        PlanetLifeController.instance.playerLife = 3;
+        Score.Instance.scorePoints = 0;
+        StartCoroutine(BackToMainMenu());
+    }
+
+    public IEnumerator BackToMainMenu() 
+    {
+        yield return new WaitForSeconds(0.5f);
         gameOverPanel.SetActive(false);
         gameWinPanel.SetActive(false);
-        SceneManager.LoadScene("Game");
+        //BackgroundMusic.instance.PlayMenuMusic();
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void QuitGame()
     {
         Application.Quit();
+        //StartCoroutine(ExitGame());
+    }
+
+    public IEnumerator ExitGame()
+    {
+        yield return new WaitForSeconds(1f);
+        Application.Quit();
     }
 
     public IEnumerator PlanetHit()
     {
-        planetLife -= 1;
+        PlanetLifeController.instance.playerLife -= 1;
         hurtPanel.SetActive(true);
         planetController.planetAnimator.SetBool("hit", true);
         yield return new WaitForSeconds(0.1f);
@@ -332,44 +496,76 @@ public class GameManager : MonoBehaviour
         {
             multiplePlayers[i].SetActive(false);
         }
-
-        /*
-        //size buff off
-        spritesScale.localScale -= buffSize;
-        spritesScale.localPosition -= buffLocation;
-        */
-
+        
         //speed buff off
         player.playerSpeed = playerOriginalSpeed;
         speedEffect.enableEmission = false;
 
         //loading text for new level
-        if(SceneManager.GetActiveScene().buildIndex == 1) 
+        if(SceneManager.GetActiveScene().buildIndex < 5) 
         { 
             Animator canvasAnim = FindObjectOfType<MainMenu>().GetComponent<Animator>();
             canvasAnim.SetTrigger("newLevel");
+            /*
+            if (PlanetLifeController.instance.playerLife == 1)
+            {
+                Score.Instance.scorePoints += 1;
+            }
+            else if (PlanetLifeController.instance.playerLife == 2)
+            {
+                Score.Instance.scorePoints += 2;
+            }
+            else if (PlanetLifeController.instance.playerLife == 3)
+            {
+                Score.Instance.scorePoints += 3;
+            }
+            */
         }
+
+        
 
         yield return new WaitForSeconds(5);
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        if(SceneManager.GetActiveScene().buildIndex == 2)
+        if(SceneManager.GetActiveScene().buildIndex == 5)
         {
+            UpdateWinScoreBoardText(); 
             gameWinPanel.SetActive(true);
-            gameWinScoreText.text = "YOUR SCORE: " + Score.Instance.scorePoints.ToString();
-            gameWinHighScoreText.text = "HIGHSCORE: " + PlayerPrefs.GetInt("Highscore").ToString();
+
+            gameWinScoreText.text = "PISTEESI: " + Score.Instance.scorePoints.ToString();
+            gameWinHighScoreText.text = "ENNÄTYSPISTEET: " + PlayerPrefs.GetInt("Highscore").ToString();
             Time.timeScale = 0;
         }
         else
         {
-            SceneManager.LoadScene("Game2");
+            AddScoreFromHealth();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
     public void UpdateHeartUi()
     {
-        for (int i = planetLife; i < hearts.Length; i++)
+        for (int i = PlanetLifeController.instance.playerLife; i < hearts.Length; i++)
         {
             hearts[i].enabled = false;
+        }
+    }
+
+    private void AddScoreFromHealth()
+    {
+        if (PlanetLifeController.instance.playerLife == 1)
+        {
+            Score.Instance.AddScore(1);
+            return;
+        }
+        else if (PlanetLifeController.instance.playerLife == 2)
+        {
+            Score.Instance.AddScore(2);
+            return;
+        }
+        else if (PlanetLifeController.instance.playerLife == 3)
+        {
+            Score.Instance.AddScore(3);
+            return;
         }
     }
 }

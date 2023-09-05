@@ -18,15 +18,15 @@ public class Score : MonoBehaviour
 
     private void Awake()
     {
-        if(Instance != this) //make this singleton
+        if (Instance == null)
         {
             Instance = this;
         }
         else
         {
-            Destroy(this.gameObject); //destroy others
-            return;
+            Destroy(gameObject);
         }
+       
 
         //Instance = this;
         DontDestroyOnLoad(this);
@@ -34,7 +34,7 @@ public class Score : MonoBehaviour
     }
     void Start()
     {
-
+        //Application.targetFrameRate = 60;
     }
     void Update()
     {

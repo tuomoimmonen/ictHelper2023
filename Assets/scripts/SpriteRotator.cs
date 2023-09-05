@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpriteRotator : MonoBehaviour
 {
     private Transform myRotation;
+    [SerializeField] Transform playersRotation;
     void Start()
     {
         myRotation = GetComponent<Transform>();
@@ -12,6 +13,7 @@ public class SpriteRotator : MonoBehaviour
 
     void Update()
     {
-        myRotation.rotation = Quaternion.identity; //keep the sprite original rotation
+        myRotation.Rotate(Vector3.zero);
+        //myRotation.rotation = Quaternion.identity; //keep the sprite original rotation
     }
 }

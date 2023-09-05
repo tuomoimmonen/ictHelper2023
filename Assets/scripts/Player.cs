@@ -17,10 +17,16 @@ public class Player : MonoBehaviour
     public bool playerIsAllowedMove = true;
     private bool canTransition = true;
 
+    private bool isAlive = true;
+
+    private bool isMouseMoving = false;
+
     [SerializeField] GameObject playerDeathParticles;
 
     void Start()
     {
+        isAlive = true;
+        canTransition = true;
         myTransform = GetComponent<Transform>();
         playerAnim = GetComponent<Animator>();
         gameManager = FindObjectOfType<GameManager>();
@@ -28,6 +34,10 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        if(playerAnim == null)
+        {
+            playerAnim = GetComponent<Animator>();
+        }
         //inputY = Input.GetAxisRaw("Vertical"); //raw value up and down 
         //Debug.Log(inputX); //test
         //transform.Rotate(Vector3.forward * inputY * playerSpeed * Time.deltaTime); //up and down movement
@@ -36,7 +46,21 @@ public class Player : MonoBehaviour
             inputX = Input.GetAxisRaw("Horizontal"); //raw value from left and right -1 left, 1 right, 0 center
             transform.Rotate(Vector3.forward * inputX * playerSpeed * Time.deltaTime); //making the player move
 
-            if (Input.touchCount > 0) //start touch input, index error if not
+            if (Input.GetMouseButton(0)) // Left mouse button
+            {
+                RotatePlayer(-1);
+            }
+            else if (Input.GetMouseButton(1)) // Right mouse button
+            {
+                RotatePlayer(1);
+            }
+            else
+            {
+                isMouseMoving = false;
+            }
+
+
+        if (Input.touchCount > 0) //start touch input, index error if not
             {
                 //var lets the compiler declare the variably type
                 //int halfWidth == var halfWidth
@@ -57,7 +81,7 @@ public class Player : MonoBehaviour
         }
 
         //animator for rolling
-        if(inputX != 0 || Input.touchCount > 0)
+        if(inputX != 0 || Input.touchCount > 0 || isMouseMoving)
         {
             playerAnim.SetBool("isMoving", true);
         }
@@ -80,12 +104,25 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.identity;
             playerAnim.SetTrigger("nextLevel");
         }
-        /*
-        if(gameManager.planetLife == 0 && gameManager.planetIsAlive == true)
+        
+        if(PlanetLifeController.instance.playerLife == 0 && isAlive)
         {
-            playerAnim.SetTrigger("death");
-            Instantiate(playerDeathParticles, spriteTransform.position, spriteTransform.rotation);
+            isAlive = false;
+            //SFXManager.instance.StopSfx();
+            StartCoroutine(PlayerDeath());
         }
-        */
+        
+    }
+
+    void RotatePlayer(int direction)
+    {
+        isMouseMoving = true;
+        transform.Rotate(Vector3.forward * direction * playerSpeed * Time.deltaTime);
+    }
+    private IEnumerator PlayerDeath()
+    {
+        playerAnim.SetTrigger("death");
+        Instantiate(playerDeathParticles, spriteTransform.position, spriteTransform.rotation);
+        yield return new WaitForSeconds(3);
     }
 }

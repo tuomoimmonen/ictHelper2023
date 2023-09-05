@@ -4991,6 +4991,7 @@ MonoBehaviour:
   maxMovementSpeed: 2.5
   destroyParticles: {fileID: 7257770090039802072, guid: d1d6cb6c43bc6d343a8bafff17de3c7d, type: 3}
   planetHitParticles: {fileID: 7257770090039802072, guid: 0ba5f4a016cdcc54e8471ebd829574b5, type: 3}
+  firstTimeHit: 1
 --- !u!58 &4046066979622784024
 CircleCollider2D:
   m_ObjectHideFlags: 0

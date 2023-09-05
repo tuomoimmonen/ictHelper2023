@@ -14,6 +14,7 @@ public class MainMenu : MonoBehaviour
     public IEnumerator StartGame()
     {
         yield return new WaitForSeconds(1);
+        //BackgroundMusic.instance.PlayGameMusic();
         SceneManager.LoadScene("Game");
     }
 

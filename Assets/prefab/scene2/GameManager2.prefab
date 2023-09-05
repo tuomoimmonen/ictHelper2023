@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8068274856491812008
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7788994110175634007}
+  - component: {fileID: 8511273912367797385}
+  m_Layer: 0
+  m_Name: GameManager2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7788994110175634007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8068274856491812008}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8511273912367797385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8068274856491812008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95379060b80db1248b993a3d9bb8c49e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  planeLifeText: {fileID: 0}
+  planetLife: 3
+  planetIsAlive: 1
+  hearts:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  superSlider: {fileID: 0}
+  superMeter: 0
+  multiplePlayers:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  spritesScale:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  superDurationTimerText: {fileID: 0}
+  buffSize: {x: 1.1, y: 1.1, z: 1.1}
+  buffLocation: {x: 0, y: 1.15, z: 0}
+  speedEffect: {fileID: 0}
+  superSizeEffect: {fileID: 0}
+  firewallBuff: {fileID: 0}
+  hurtPanel: {fileID: 0}
+  planetDeathParticles: {fileID: 8410293463260951825, guid: 33a0eef01c36022409f99e12124bb22f, type: 3}
+  playerDeathParticles: {fileID: 7721022008773974539, guid: 413c846ca1322e34192f80d75748e684, type: 3}
+  surviveTimer: 10
+  timerText: {fileID: 0}
+  gameOverHighScoreText: {fileID: 0}
+  scoreText: {fileID: 0}
+  gameOverPanel: {fileID: 0}
+  gameWinPanel: {fileID: 0}
+  gameWinHighScoreText: {fileID: 0}
+  gameWinScoreText: {fileID: 0}
+  gameOverScoreText: {fileID: 0}
+  transitioningText: {fileID: 0}
+  textAnimator: {fileID: 0}
+  gameStarted: 0
+  oikealleText: {fileID: 0}
+  vasemmalleText: {fileID: 0}
+  rightKeyPressed: 0
+  leftKeyPressed: 0

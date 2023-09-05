@@ -21,7 +21,7 @@ public class PlanetController : MonoBehaviour
             planetAnimator.SetTrigger("nextLevel");
         }
 
-        if(gameManager.planetLife == 0)
+        if(PlanetLifeController.instance.playerLife == 0)
         {
             isAlive = false;
             planetAnimator.SetTrigger("death");
