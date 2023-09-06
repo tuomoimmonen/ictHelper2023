@@ -9,6 +9,7 @@ TagManager:
   - PlanetCenter
   - Score
   - Enemy
+  - Win
   layers:
   - Default
   - TransparentFX
