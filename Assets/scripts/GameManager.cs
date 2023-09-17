@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
         {
             superSlider.value = superMeter;
         }
-        scoreText.text = "PISTEET: " + Score.Instance.scorePoints.ToString();
+        scoreText.text = "SCORE: " + Score.Instance.scorePoints.ToString();
 
         //next level system
         if (surviveTimer <= 0)
@@ -401,7 +401,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         SFXManager.instance.StopSfx();
         gameOverHighScoreText.text = "ENNÄTYSPISTEET: " + PlayerPrefs.GetInt("Highscore").ToString();
-        gameOverScoreText.text = "PISTEESI: " + Score.Instance.scorePoints.ToString();
+        gameOverScoreText.text = "SCORE: " + Score.Instance.scorePoints.ToString();
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
         //SceneManager.LoadScene("GameOver"); //reload gameover scene
@@ -531,7 +531,7 @@ public class GameManager : MonoBehaviour
             UpdateWinScoreBoardText(); 
             gameWinPanel.SetActive(true);
 
-            gameWinScoreText.text = "PISTEESI: " + Score.Instance.scorePoints.ToString();
+            gameWinScoreText.text = "SCORE: " + Score.Instance.scorePoints.ToString();
             gameWinHighScoreText.text = "ENNÄTYSPISTEET: " + PlayerPrefs.GetInt("Highscore").ToString();
             Time.timeScale = 0;
         }

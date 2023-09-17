@@ -60,7 +60,7 @@ public class WaveSpawner : MonoBehaviour
     private IEnumerator SpawnWave()
     {
         waveAnnouncerText.gameObject.SetActive(true);
-        waveAnnouncerText.text = "Wave " + (currentWave + 1) + " alkaa!";
+        waveAnnouncerText.text = "Wave " + (currentWave + 1) + " starting!";
         yield return new WaitForSeconds(announcerDuration);
         waveAnnouncerText.gameObject.SetActive(false);
         if (currentWave > 1)
