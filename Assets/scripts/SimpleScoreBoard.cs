@@ -29,18 +29,6 @@ public class SimpleScoreBoard : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        /*
-        scoreboardText.text = "";
-        for (int i = 0; i < topScores.Length; i++)
-        {
-            scoreboardText.text += (i + 1) + ". " + topScores[i] + "\n";
-        }
-        */
-    }
-
     public void AddScore(int newScore)
     {
         for (int i = 0; i < topScores.Length; i++)
